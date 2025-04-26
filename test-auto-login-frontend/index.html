@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Test Auto Login</title>
+  </head>
+  <body>
+    <h1 id="status">Loading...</h1>
+
+    <script>
+      async function checkLogin() {
+        const res = await fetch("http://172.23.48.1:4000/me", {
+          credentials: "include",
+        });
+        const data = await res.json();
+
+        const statusEl = document.getElementById("status");
+        if (data.loggedIn) {
+          statusEl.innerText = `Welcome, ${data.user}`;
+        } else {
+          statusEl.innerText = "Not Logged In";
+        }
+      }
+
+      checkLogin();
+    </script>
+  </body>
+</html>
